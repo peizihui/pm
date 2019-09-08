@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.pm.dao.datasource.User" table="t_user" schema="pm">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="userName">
+            <column name="user_name" sql-type="varchar(255)"/>
+        </property>
+        <property name="userPwd">
+            <column name="user_pwd" sql-type="varchar(255)"/>
+        </property>
+        <property name="isFreeze">
+            <column name="is_freeze" sql-type="tinyint(1)"/>
+        </property>
+    </class>
+</hibernate-mapping>
