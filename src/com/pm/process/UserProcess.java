@@ -15,16 +15,26 @@ public class UserProcess {
         userDAO = new UserDAO(session);
     }
 
-    public User queryUser(int id){
+    /***
+     *
+     */
+    public User queryUserByID(int id){
         try{
             User user = userDAO.queryUserByID(id);
             return user;
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             return null;
-        }finally {
-            session.close();
         }
     }
 
+    public User userLogin (String name, String pwd) {
+        try {
+            User user = userDAO.userLogin(name,pwd);
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
