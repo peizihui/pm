@@ -16,18 +16,23 @@ public class UserProcess {
     }
 
     /***
-     *
+     * public User queryUserByID(int id){
+     *         try{
+     *             User user = userDAO.queryUserByID(id);
+     *             return user;
+     *         }catch (Exception e){
+     *             e.printStackTrace();
+     *             return null;
+     *         }
+     *     }
      */
-    public User queryUserByID(int id){
-        try{
-            User user = userDAO.queryUserByID(id);
-            return user;
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
 
+    /***
+     * 用户登录进程
+     * @param name
+     * @param pwd
+     * @return
+     */
     public User userLogin (String name, String pwd) {
         try {
             User user = userDAO.userLogin(name,pwd);
