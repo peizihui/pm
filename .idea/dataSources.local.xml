@@ -9,16 +9,7 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="schema" qname="@" />
-        </introspection-scope>
-      </schema-mapping>
-    </data-source>
-    <data-source name="hibernate.cfg.xml/Hibernate" uuid="8c39499d-4256-45b3-8eab-00b4e067e325">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
-      <user-name>root</user-name>
-      <schema-mapping />
+      <introspection-schemas>*:@</introspection-schemas>
     </data-source>
   </component>
 </project>
