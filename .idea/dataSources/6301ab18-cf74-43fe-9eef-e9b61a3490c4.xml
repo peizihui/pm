@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="aliyun_pm">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.15">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.16">
     <root id="1">
       <ServerVersion>5.5.28</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -18,7 +18,6 @@
     </schema>
     <schema id="5" parent="1" name="pm">
       <Current>1</Current>
-      <Visible>1</Visible>
       <Collation>utf8_general_ci</Collation>
     </schema>
     <schema id="6" parent="1" name="root">
