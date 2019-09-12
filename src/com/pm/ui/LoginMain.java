@@ -68,10 +68,10 @@ public class LoginMain {
         panel3.add(mgRadioButton);
         panel4.add(loginButton);
 
+        mainFrame = new JFrame("积分管理系统登录入口");
 
-
-        mainFrame = new JFrame("登录入口");
         mainFrame.setSize(300,200);
+        mainFrame.setBounds(600,200,300,220);
         mainFrame.setLayout(new GridLayout(4,1));
         mainFrame.setResizable(false);
         mainFrame.addWindowListener(new WindowAdapter() {
@@ -118,7 +118,8 @@ public class LoginMain {
                         if (mp.ManagerLogin(account, password) != null) {
                             mainFrame.dispose();
                             //TODO 添加管理员窗口
-                            System.out.println("MY");
+                            ManagerUI jframeMain = new ManagerUI();
+                            jframeMain.Menu();
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "用户名或密码错误！",
