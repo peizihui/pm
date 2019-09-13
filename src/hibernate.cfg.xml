@@ -11,6 +11,7 @@
 
         <!-- DB schema will be updated if needed -->
          <property name="hibernate.hbm2ddl.auto">update</property>
+         <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
 
         <mapping class="com.pm.dao.datasource.Goods"/>

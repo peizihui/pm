@@ -1,8 +1,10 @@
 package com.pm.dao.factory;
 
 import com.pm.dao.datasource.User;
+import com.pm.ui.AddUser;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import sun.font.CreatedFontTracker;
 
 /***
  * 包含用户表的数据库操作语句
@@ -31,6 +33,7 @@ public class UserDAO {
      * @return
      */
     //插入用户
+
     public void insertUser(User b) {
         session.save(b);
     }

@@ -119,7 +119,7 @@ public class LoginMain {
                             mainFrame.dispose();
                             //TODO 添加管理员窗口
                             ManagerUI jframeMain = new ManagerUI();
-                            jframeMain.Menu();
+                            jframeMain.MUI();
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "用户名或密码错误！",

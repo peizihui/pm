@@ -51,10 +51,10 @@ public class UserProcess {
         try{
             //业务逻辑
             //1.根据id查询该账户是否存在
-            User user2 = userDAO.queryUserByID(user.getUserName());
+         /*   User user2 = userDAO.queryUserByID(user.getUserName());
             if(user2 != null){
                 JOptionPane.showMessageDialog(null, "用户已存在");
-            }
+            }*/
             userDAO.insertUser(user);
             //未出现异常提交
             transaction.commit();
