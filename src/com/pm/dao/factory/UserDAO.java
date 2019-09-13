@@ -20,7 +20,7 @@ public class UserDAO {
      * @param id
      * @return
      */
-    public User queryUserByID(int id){
+    public User queryUserByID(String id){
         return session.get(User.class, id);
     }
 
@@ -30,6 +30,12 @@ public class UserDAO {
      * @param pwd
      * @return
      */
+    //插入用户
+
+    public void insertUser(User b) {
+        session.save(b);
+    }
+
     public User userLogin(String name, String pwd){
 
         Query query = session.createQuery("from User where userName= ?1  and userPwd= ?2");
@@ -40,4 +46,6 @@ public class UserDAO {
         return user;
 
     }
+
+
 }

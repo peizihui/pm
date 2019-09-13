@@ -1,7 +1,9 @@
 package com.pm.ui;
 
+import com.pm.dao.datasource.Manager;
 import com.pm.process.ManagerProcess;
 import com.pm.process.UserProcess;
+import com.pm.ui.manager.ManagerMain;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class LoginMain {
+public class LoginMain extends JFrame{
     private String account = "";
     private String password = "";
 
@@ -46,6 +48,7 @@ public class LoginMain {
 
         userRadioButton = new JRadioButton("用户",true);
         mgRadioButton = new JRadioButton("管理员");
+
         loginButton = new JButton("登录");
 
 
@@ -68,10 +71,10 @@ public class LoginMain {
         panel3.add(mgRadioButton);
         panel4.add(loginButton);
 
+        mainFrame = new JFrame("积分管理系统登录入口");
 
-
-        mainFrame = new JFrame("登录入口");
         mainFrame.setSize(300,200);
+        mainFrame.setBounds(600,200,300,220);
         mainFrame.setLayout(new GridLayout(4,1));
         mainFrame.setResizable(false);
         mainFrame.addWindowListener(new WindowAdapter() {
@@ -114,11 +117,20 @@ public class LoginMain {
                                     JOptionPane.WARNING_MESSAGE);
                         }
                     } else {
+                        //查询用户信息
                         ManagerProcess mp = new ManagerProcess();
-                        if (mp.ManagerLogin(account, password) != null) {
+                        Manager manager = mp.ManagerLogin(account, password);
+                        if (manager != null) {
                             mainFrame.dispose();
                             //TODO 添加管理员窗口
-                            System.out.println("MY");
+                           /* ManagerUI jframeMain = new ManagerUI();
+                            jframeMain.Menu();*/
+
+                           //将用户信息传入下个窗口
+                            ManagerMain managerMain = new ManagerMain();
+                            managerMain.go();
+
+
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "用户名或密码错误！",
