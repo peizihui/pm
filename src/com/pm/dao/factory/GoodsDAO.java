@@ -26,4 +26,10 @@ public class GoodsDAO {
     public void deleGoods(Goods goods){
         session.delete(goods);
     }
+
+    public void deleGoodsByID(int id){
+        Query query = session.createQuery("update Goods set isDele = 1 where id = ?1");
+        query.setParameter(1,id);
+        query.executeUpdate();
+    }
 }

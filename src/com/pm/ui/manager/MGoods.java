@@ -71,7 +71,7 @@ public class MGoods {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AddGoods addGoods = new AddGoods();
-                //addGoods.go();
+                addGoods.go();
             }
         });
 
@@ -86,20 +86,25 @@ public class MGoods {
         deleGoodsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               //获取选中行的值
-               String id = table.getValueAt(table.getSelectedRow(),1).toString();
-               int ID = Integer.valueOf(id);
 
-               GoodsProcess goodsProcess = new GoodsProcess();
+
+                GoodsProcess goodsProcess = new GoodsProcess();
 
                 int result=JOptionPane.showConfirmDialog(null, "是否删除该商品？");
                 if(result==0){
+
+                    //获取选中行的id
+                    String id = table.getValueAt(table.getSelectedRow(),0).toString();
+
+                    int ID = Integer.valueOf(id);
                     boolean c = goodsProcess.deleGoodsByID(ID);
                     if (c) {
+                        //刷新表格
+                        showData();
                         JOptionPane.showMessageDialog(null,
                                 "删除成功！",
                                 "注意",
-                                JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.WARNING_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "删除失败！",
@@ -123,11 +128,13 @@ public class MGoods {
 
         for(Goods goods : goodsList){
             Vector v = new Vector();
-            v.add(goods.getId());
-            v.add(goods.getGoodsId());
-            v.add(goods.getGoodsName());
-            v.add(goods.getGoodsPrice());
-            defaultTableModel.addRow(v);
+            if (goods.getIsDele() == 0){
+                v.add(goods.getId());
+                v.add(goods.getGoodsId());
+                v.add(goods.getGoodsName());
+                v.add(goods.getGoodsPrice());
+                defaultTableModel.addRow(v);
+            }
         }
     }
 }

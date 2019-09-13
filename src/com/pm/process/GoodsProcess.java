@@ -36,8 +36,7 @@ public class GoodsProcess {
     public boolean deleGoodsByID(int id) {
         Transaction transaction = session.beginTransaction();
         try {
-            Goods goods = goodsDAO.getGoodsByID(id);
-            goodsDAO.deleGoods(goods);
+            goodsDAO.deleGoodsByID(id);
             transaction.commit();
             return true;
         } catch (Exception e) {
