@@ -40,7 +40,7 @@ public class MUser extends JFrame {
         setTitle("用户管理界面");// 标题
         setSize(550, 200);// 窗口大小
         setLocationRelativeTo(null);// 窗口居中
-        setDefaultCloseOperation(EXIT_ON_CLOSE);// 窗口点击关闭时,退出程序
+
         this.setVisible(true);
 
     }
