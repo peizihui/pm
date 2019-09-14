@@ -6,10 +6,7 @@ import com.pm.process.GoodsProcess;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -20,6 +17,7 @@ public class MGoods {
     private JButton addGoodsButton;
     private JButton editGoodsButton;
     private JButton deleGoodsButton;
+    private JButton refreshButton;
     private JFrame mainFrame;
     private Object[][] data;
 
@@ -27,15 +25,17 @@ public class MGoods {
         addGoodsButton = new JButton("添加商品");
         editGoodsButton = new JButton("修改商品信息");
         deleGoodsButton = new JButton("删除商品");
+        refreshButton = new JButton("刷新");
 
         jp1 = new JPanel();
         jp2 = new JPanel();
 
+
         //设置表格
         String[] columnNames = {"ID", "商品编号", "商品名", "兑换价格"};
 
-        table = new JTable(data, columnNames);
-        table.setModel(new DefaultTableModel(data, columnNames));
+        table = new JTable(null, columnNames);
+        table.setModel(new DefaultTableModel(null, columnNames));
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setSize(300, 300);
@@ -48,6 +48,7 @@ public class MGoods {
         jp1.add(addGoodsButton);
         jp1.add(editGoodsButton);
         jp1.add(deleGoodsButton);
+        jp1.add(refreshButton);
         jp2.add(scrollPane);
 
         mainFrame = new JFrame("商品管理");
@@ -55,7 +56,6 @@ public class MGoods {
         mainFrame.setLayout(new GridLayout(3,1));
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
-        //todo 窗口关闭
 
         //添加组件
 
@@ -66,7 +66,12 @@ public class MGoods {
 
     public void go() {
         showData();
-
+        refreshButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showData();
+            }
+        });
         addGoodsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,7 +101,7 @@ public class MGoods {
                     //获取选中行的id
                     String id = table.getValueAt(table.getSelectedRow(),0).toString();
 
-                    int ID = Integer.valueOf(id);
+                    int ID = Integer.parseInt(id);
                     boolean c = goodsProcess.deleGoodsByID(ID);
                     if (c) {
                         //刷新表格

@@ -45,4 +45,17 @@ public class GoodsProcess {
             return false;
         }
     }
+
+    public boolean saveGoods(Goods goods) {
+        Transaction transaction = session.beginTransaction();
+        try {
+            goodsDAO.insertGoods(goods);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }

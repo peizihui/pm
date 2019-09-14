@@ -32,4 +32,14 @@ public class GoodsDAO {
         query.setParameter(1,id);
         query.executeUpdate();
     }
+
+    public Goods getGoodsByGoodsId(String goodsId){
+        Query query = session.createQuery("from Goods where goodsId = ?1");
+        query.setParameter(1,goodsId);
+        return (Goods) query.uniqueResult();
+    }
+
+    public void insertGoods(Goods goods){
+        session.save(goods);
+    }
 }
