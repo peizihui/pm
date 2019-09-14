@@ -42,4 +42,16 @@ public class GoodsDAO {
     public void insertGoods(Goods goods){
         session.save(goods);
     }
+
+    public void updateGoods(Goods goods) {
+        Query query = session.createQuery(
+                "update Goods set goodsId = ?1, " +
+                        "goodsName = ?2, " +
+                        "goodsPrice = ?3 where id = ?4");
+        query.setParameter(1, goods.getGoodsId());
+        query.setParameter(2, goods.getGoodsName());
+        query.setParameter(3, goods.getGoodsPrice());
+        query.setParameter(4, goods.getId());
+        query.executeUpdate();
+    }
 }

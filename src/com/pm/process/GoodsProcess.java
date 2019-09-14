@@ -58,4 +58,22 @@ public class GoodsProcess {
             return false;
         }
     }
+
+
+    public Goods getGoodsById(int id) {
+        return goodsDAO.getGoodsByID(id);
+    }
+
+    public boolean updateGoods(Goods goods) {
+        Transaction transaction = session.beginTransaction();
+        try {
+            goodsDAO.updateGoods(goods);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }

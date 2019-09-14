@@ -83,8 +83,12 @@ public class MGoods {
         editGoodsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String id = table.getValueAt(table.getSelectedRow(),0).toString();
+
+                int ID = Integer.parseInt(id);
+
                 EditGoods editGoods = new EditGoods();
-                //editGoods.go();
+                editGoods.go(ID);
             }
         });
 
