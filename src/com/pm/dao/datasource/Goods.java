@@ -10,6 +10,7 @@ public class Goods {
     private String goodsId;
     private String goodsName;
     private int goodsPrice;
+    private byte isDele;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -49,6 +50,16 @@ public class Goods {
 
     public void setGoodsPrice(int goodsPrice) {
         this.goodsPrice = goodsPrice;
+    }
+
+    @Basic
+    @Column(name = "is_dele", nullable = false)
+    public byte getIsDele() {
+        return isDele;
+    }
+
+    public void setIsDele(byte isDele) {
+        this.isDele = isDele;
     }
 
     @Override

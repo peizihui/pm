@@ -36,8 +36,38 @@ public class GoodsProcess {
     public boolean deleGoodsByID(int id) {
         Transaction transaction = session.beginTransaction();
         try {
-            Goods goods = goodsDAO.getGoodsByID(id);
-            goodsDAO.deleGoods(goods);
+            goodsDAO.deleGoodsByID(id);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean saveGoods(Goods goods) {
+        Transaction transaction = session.beginTransaction();
+        try {
+            goodsDAO.insertGoods(goods);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+
+    public Goods getGoodsById(int id) {
+        return goodsDAO.getGoodsByID(id);
+    }
+
+    public boolean updateGoods(Goods goods) {
+        Transaction transaction = session.beginTransaction();
+        try {
+            goodsDAO.updateGoods(goods);
             transaction.commit();
             return true;
         } catch (Exception e) {
