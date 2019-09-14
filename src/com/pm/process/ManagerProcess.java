@@ -5,18 +5,16 @@ import com.pm.dao.factory.ManagerDAO;
 import com.pm.util.HibernateUtils;
 import org.hibernate.Session;
 
-
 public class ManagerProcess {
     private Session session;
     private ManagerDAO ManagerDAO;
 
-    public ManagerProcess(){
+    public ManagerProcess() {
         //获取session
         session = HibernateUtils.getSession();
         //初始化
         ManagerDAO = new ManagerDAO(session);
     }
-
     /***
      * 使用ID查询管理员
      * @param id
@@ -39,9 +37,9 @@ public class ManagerProcess {
      * @param pwd
      * @return
      */
-    public Manager ManagerLogin (String name, String pwd) {
+    public Manager ManagerLogin(String name, String pwd) {
         try {
-            Manager Manager = ManagerDAO.ManagerLogin(name,pwd);
+            Manager Manager = ManagerDAO.ManagerLogin(name, pwd);
             return Manager;
         } catch (Exception e) {
             e.printStackTrace();

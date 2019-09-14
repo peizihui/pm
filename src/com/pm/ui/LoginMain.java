@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class LoginMain extends JFrame{
+public class LoginMain extends JFrame {
     private String account = "";
     private String password = "";
 
@@ -21,7 +21,6 @@ public class LoginMain extends JFrame{
     private JPanel panel2;
     private JPanel panel3;
     private JPanel panel4;
-
 
     private JTextField accountField;
     private JPasswordField passwordField;
@@ -34,10 +33,6 @@ public class LoginMain extends JFrame{
     private JRadioButton mgRadioButton;
     private JRadioButton userRadioButton;
 
-    //private static final int ROLE_USER = 1;
-    //private static final int ROLE_MG = 2;
-
-
     public LoginMain() {
         //初始化窗口
         accountField = new JTextField(10);
@@ -46,11 +41,10 @@ public class LoginMain extends JFrame{
         passwordField = new JPasswordField(10);
         passwordLabel = new JLabel("密码");
 
-        userRadioButton = new JRadioButton("用户",true);
+        userRadioButton = new JRadioButton("用户", true);
         mgRadioButton = new JRadioButton("管理员");
 
         loginButton = new JButton("登录");
-
 
         //将单选按钮绑定为一组
         ButtonGroup bg = new ButtonGroup();
@@ -73,12 +67,12 @@ public class LoginMain extends JFrame{
 
         mainFrame = new JFrame("积分管理系统登录入口");
 
-        mainFrame.setSize(300,200);
-        mainFrame.setBounds(600,200,300,220);
-        mainFrame.setLayout(new GridLayout(4,1));
+        mainFrame.setSize(300, 200);
+        mainFrame.setBounds(600, 200, 300, 220);
+        mainFrame.setLayout(new GridLayout(4, 1));
         mainFrame.setResizable(false);
         mainFrame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent windowEvent){
+            public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
             }
         });
@@ -89,14 +83,11 @@ public class LoginMain extends JFrame{
         mainFrame.add(panel3);
         mainFrame.add(panel4);
         mainFrame.setVisible(true);
-
     }
 
-    public void Login(){
-
+    public void Login() {
         //监听登录按钮
         loginButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -126,7 +117,7 @@ public class LoginMain extends JFrame{
                            /* ManagerUI jframeMain = new ManagerUI();
                             jframeMain.Menu();*/
 
-                           //将用户信息传入下个窗口
+                            //将用户信息传入下个窗口
                             ManagerMain managerMain = new ManagerMain();
                             managerMain.go();
 
@@ -144,7 +135,7 @@ public class LoginMain extends JFrame{
         });
     }
 
-    public boolean check(){
+    public boolean check() {
         account = accountField.getText();
         password = String.valueOf(passwordField.getPassword());
 

@@ -6,18 +6,18 @@ import java.util.Objects;
 @Entity
 @Table(name = "t_user", schema = "pm")
 public class User {
-    private String id;
+    private int id;
     private String userName;
     private String userPwd;
     private byte isFreeze;
 
    @Id
     @Column(name = "id", nullable = false)
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

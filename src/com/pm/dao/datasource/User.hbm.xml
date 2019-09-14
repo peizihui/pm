@@ -7,7 +7,6 @@
     <class name="com.pm.dao.datasource.User" table="t_user" schema="pm">
         <id name="id">
             <column name="id" sql-type="int(11)"/>
-            <generator class="identity"></generator>
         </id>
         <property name="userName">
             <column name="user_name" sql-type="varchar(255)"/>

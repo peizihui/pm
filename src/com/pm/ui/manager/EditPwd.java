@@ -1,66 +1,65 @@
 package com.pm.ui.manager;
 
-import com.pm.dao.datasource.User;
 import com.pm.process.UserProcess;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
+public class EditPwd extends JFrame {
 
-public class AddUser extends JFrame {
-    /**
-     * 添加用户
-     */
     private static final long serialVersionUID = 12312321321L;
-    JLabel tname;//标签
-    JTextField name;//文本
-    JButton btnadd;//按钮
-    JPanel jp1, jp3;//面板
+    JLabel tpwd0;
+    JLabel tpwd1;//标签
+    JPasswordField pwd0, pwd1;//文本
+    JButton btnedit;//按钮
+    JPanel jp1, jp2, jp3;//面板
 
     JPanel jpmain = new JPanel();
     JFrame frame = new JFrame();
 
     //获取输入框内的值
-    String strname;
+    String strpwd0;
+    String strpwd1;
 
     //界面方法
-    public void Main() {
+    public void Main(int id, String pwd) {
         //初始化面板
         jp1 = new JPanel();
+        jp2 = new JPanel();
         jp3 = new JPanel();
 
         //将每一行的内容添加
-        tname = new JLabel("输入用户名:");
-        name = new JTextField(10);
+        tpwd0 = new JLabel("输入新密码:");
+        pwd0 = new JPasswordField(10);
 
-        jp1.add(tname);
-        jp1.add(name);
+        tpwd1 = new JLabel("确认密码:");
+        pwd1 = new JPasswordField(10);
 
-        btnadd = new JButton("Add");
-        jp3.add(btnadd);
+        jp1.add(tpwd0);
+        jp1.add(pwd0);
+        jp2.add(tpwd1);
+        jp2.add(pwd1);
+
+        btnedit = new JButton("submit");
+        jp3.add(btnedit);
 
         //六行一列
-        jpmain.setLayout(new GridLayout(1, 1));//网格式布局
+        jpmain.setLayout(new GridLayout(2, 1));//网格式布局
 
         //将所有的面板加入主面板中
         //作用,在刷新界面时只需删除主面板即可
         jpmain.add(jp1);
-
+        jpmain.add(jp2);
         jpmain.add(jp3);
 
         //将主面板设置在界面上
         frame.add(jpmain);
 
         //设置窗体
-        frame.setTitle("新增用户");//窗体标签
+        frame.setTitle("修改用户密码");//窗体标签
         frame.setSize(400, 150);//窗体大小
         frame.setLocationRelativeTo(null);//在屏幕中间显示(居中显示)
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//退出关闭JFrame
@@ -70,28 +69,25 @@ public class AddUser extends JFrame {
         frame.setResizable(false);
 
         //设置按钮事件
-        btnadd.addActionListener(new ActionListener() {
+        btnedit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //获取输入框内容
                 findjtext();
                 //判断输入框是否为空
-                if (strname.equals("")) {
-                    JOptionPane.showMessageDialog(null, "不能为空！", "提示", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    //将输入框的值转入bean
-                    User user = new User();
+                if (strpwd0.equals("") || strpwd1.equals("")) {
+                    JOptionPane.showMessageDialog(null, "不能为空！", "提示", JOptionPane.WARNING_MESSAGE); }
+                //判断两次输入是否相等
+                else if (!strpwd0.equals(strpwd1)){
+                    JOptionPane.showMessageDialog(null, "两次输入不一致！", "提示", JOptionPane.WARNING_MESSAGE); }
+                else{
                     //创建service对象,
-                    UserProcess userProcess = new UserProcess();
-                    user.setUserName(strname);
-                    user.setUserPwd("123456");
-
-                    //执行添加用户方法,并将返回值存储在news里
-                    boolean news = userProcess.insertUser(user);
-
+                    UserProcess up = new UserProcess();
+                    Boolean modify = up.editpwdUser(id, strpwd1);
+                    //执行添加用户方法,并将返回值存储在modify里
                     //判断执行是否成功
-                    if (news) {
-                        JOptionPane.showMessageDialog(frame, "添加成功", "提示", JOptionPane.WARNING_MESSAGE);
+                    if (modify) {
+                        JOptionPane.showMessageDialog(frame, "密码修改成功", "提示", JOptionPane.WARNING_MESSAGE);
                         frame.dispose();
                         ManagerMain jframeMain = new ManagerMain();
                         jframeMain.go();
@@ -107,10 +103,8 @@ public class AddUser extends JFrame {
 
     //获取输入框输入
     public void findjtext() {
-        strname = name.getText().toString();
+        strpwd0 = pwd0.getText().toString();
+        strpwd1 = pwd1.getText().toString();
     }
 
-   /* public static void main(String[] args) {
-       new AddUser().Main();
-    }*/
 }
