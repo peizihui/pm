@@ -22,7 +22,7 @@ public class MGoods {
     private Object[][] data;
 
     public MGoods() {
-        addGoodsButton = new JButton("添加商品");
+        addGoodsButton = new JButton("上架商品");
         editGoodsButton = new JButton("修改商品信息");
         deleGoodsButton = new JButton("删除商品");
         refreshButton = new JButton("刷新");

@@ -61,7 +61,7 @@ public class AddGoods{
         panel4.add(confirmButton);
         panel4.add(cancelButton);
 
-        mainFrame = new JFrame(" 添加商品");
+        mainFrame = new JFrame("上架商品");
 
         mainFrame.setSize(300,200);
         mainFrame.setBounds(600,200,300,220);
