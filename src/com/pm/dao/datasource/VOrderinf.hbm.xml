@@ -1,63 +1,67 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.pm.dao.datasource.VOrderinf" table="v_orderinf" schema="pm">
-        <property name="userName">
-            <column name="user_name" sql-type="varchar(255)"/>
-        </property>
-        <property name="isFreeze">
-            <column name="is_freeze" sql-type="tinyint(1)"/>
-        </property>
-        <property name="goodsName">
-            <column name="goods_name" sql-type="varchar(255)"/>
-        </property>
-        <property name="goodsPrice">
-            <column name="goods_price" sql-type="int(11)"/>
-        </property>
-        <property name="osType">
-            <column name="os_type" sql-type="varchar(255)"/>
-        </property>
-        <property name="pointValue">
-            <column name="point_value" sql-type="int(11)"/>
-        </property>
-        <property name="orderId">
-            <column name="order_id" sql-type="varchar(255)"/>
-        </property>
-        <property name="pointType">
-            <column name="point_type" sql-type="varchar(255)"/>
-        </property>
-        <property name="createDate">
-            <column name="create_date" sql-type="date"/>
-        </property>
-        <property name="compDate">
-            <column name="comp_date" sql-type="date" not-null="true"/>
-        </property>
-        <property name="userId">
-            <column name="user_ID" sql-type="int(11)"/>
-        </property>
-        <property name="oId">
-            <column name="o_ID" sql-type="int(11)"/>
-        </property>
-        <property name="gId">
-            <column name="g_ID" sql-type="int(11)"/>
-        </property>
-        <property name="goodsId">
-            <column name="goods_ID" sql-type="varchar(255)"/>
-        </property>
-        <property name="osId">
-            <column name="os_ID" sql-type="int(11)"/>
-        </property>
-        <property name="pointId">
-            <column name="point_ID" sql-type="int(11)"/>
-        </property>
-        <property name="ptId">
-            <column name="pt_ID" sql-type="int(11)"/>
-        </property>
-        <property name="isDele">
-            <column name="is_dele" sql-type="tinyint(1)" not-null="true"/>
-        </property>
+    <class name="com.pm.dao.datasource.VOrderinfId" table="v_orderinf" schema="pm">
+        <composite-id>
+            
+        
+            <key-property name="userName">
+                <column name="user_name" sql-type="varchar(255)"/>
+            </key-property>
+            <key-property name="isFreeze">
+                <column name="is_freeze" sql-type="tinyint(1)"/>
+            </key-property>
+            <key-property name="goodsName">
+                <column name="goods_name" sql-type="varchar(255)"/>
+            </key-property>
+            <key-property name="goodsPrice">
+                <column name="goods_price" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="osType">
+                <column name="os_type" sql-type="varchar(255)"/>
+            </key-property>
+            <key-property name="pointValue">
+                <column name="point_value" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="orderId">
+                <column name="order_id" sql-type="varchar(255)"/>
+            </key-property>
+            <key-property name="pointType">
+                <column name="point_type" sql-type="varchar(255)"/>
+            </key-property>
+            <key-property name="createDate">
+                <column name="create_date" sql-type="date"/>
+            </key-property>
+            <key-property name="compDate">
+                <column name="comp_date" sql-type="date" not-null="true"/>
+            </key-property>
+            <key-property name="userId">
+                <column name="user_ID" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="oId">
+                <column name="o_ID" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="gId">
+                <column name="g_ID" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="goodsId">
+                <column name="goods_ID" sql-type="varchar(255)"/>
+            </key-property>
+            <key-property name="osId">
+                <column name="os_ID" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="pointId">
+                <column name="point_ID" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="ptId">
+                <column name="pt_ID" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="isDele">
+                <column name="is_dele" sql-type="tinyint(1)" not-null="true"/>
+            </key-property>
+        </composite-id>
     </class>
 </hibernate-mapping>
