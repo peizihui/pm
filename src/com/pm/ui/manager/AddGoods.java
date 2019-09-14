@@ -2,7 +2,7 @@ package com.pm.ui.manager;
 
 import com.pm.dao.datasource.Goods;
 import com.pm.process.GoodsProcess;
-import com.pm.util.Event;
+//import com.pm.util.Event;
 import com.pm.util.Tools;
 
 import javax.swing.*;
