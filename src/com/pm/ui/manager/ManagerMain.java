@@ -67,7 +67,7 @@ public class ManagerMain {
         mOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Morder morder = new Morder();
+                MOrder morder = new MOrder();
                 morder.go();
             }
         });
