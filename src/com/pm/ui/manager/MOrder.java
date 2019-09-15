@@ -1,10 +1,7 @@
 package com.pm.ui.manager;
 
-import com.pm.dao.datasource.Goods;
-import com.pm.dao.datasource.Order;
-import com.pm.dao.factory.GoodsDAO;
-import com.pm.process.GoodsProcess;
-import com.pm.process.OrderProcess;
+import com.pm.dao.datasource.VOrderinfId;
+import com.pm.process.OrderInfProcess;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,24 +13,20 @@ import java.util.Vector;
 public class MOrder {
 
     private JFrame jFrame;
-    private JPanel jPanelSearch,jPanelTable,jPanelButton;
-    private JTextField searchText;
+    private JPanel jPanelTable,jPanelButton;
     private JTable jTable;
     private JScrollPane scrollPane;
-    private JButton topPage,lastPage,nextPage,endPage,searchButton;
+    private JButton topPage,lastPage,nextPage,endPage,operationButton;
     private Object[][] data;
 
     public MOrder() {
         //按钮
-        searchButton = new JButton("查询");
+        operationButton = new JButton("操作");
         topPage = new JButton("首页");
         lastPage = new JButton("上一页");
         nextPage = new JButton("下一页");
         endPage = new JButton("尾页");
 
-        searchText = new JTextField(10);
-
-        jPanelSearch = new JPanel();
         jPanelTable = new JPanel();
         jPanelButton = new JPanel();
 
@@ -53,23 +46,18 @@ public class MOrder {
         jPanelButton.add(lastPage);
         jPanelButton.add(nextPage);
         jPanelButton.add(endPage);
+        jPanelButton.add(operationButton);
 
-//查询块
-        jPanelSearch.add(searchText);
-        jPanelSearch.add(searchButton);
 //表格块
         jPanelTable.add(scrollPane);
 //分页
 
-
-
         jFrame = new JFrame("订单信息");
         jFrame.setSize(500,500);
-        jFrame.setLayout(new GridLayout(3,1));
+        jFrame.setLayout(new GridLayout(2,1));
         jFrame.setResizable(false);
         jFrame.setLocationRelativeTo(null);
 
-        jFrame.add(jPanelSearch);
         jFrame.add(jPanelTable);
         jFrame.add(jPanelButton);
         jFrame.setVisible(true);
@@ -78,14 +66,8 @@ public class MOrder {
     }
 
     public void go() {
+
         showData();
-
-        searchButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-            }
-        });
 
         topPage.addActionListener(new AbstractAction() {
             @Override
@@ -114,6 +96,12 @@ public class MOrder {
 
             }
         });
+        operationButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
 
     }
     public void showData(){
@@ -121,17 +109,17 @@ public class MOrder {
         DefaultTableModel defaultTableModel =(DefaultTableModel)jTable.getModel();
         defaultTableModel.setRowCount(0);
 
-        OrderProcess orderProcess = new OrderProcess();
-        List<Order> orderList = orderProcess.getAllOrder();
+        OrderInfProcess orderInfProcess = new OrderInfProcess();
+        List<VOrderinfId> vOrderinfIdList = orderInfProcess.getAllOrderInf();
 
-        for (Order order : orderList){
+        for (VOrderinfId vOrderinfId : vOrderinfIdList){
             Vector v = new Vector();
-            v.add(order.getId());
-            v.add(order.getCreateDate());
-            v.add(order.getCompDate());
-            v.add(order.getOsId());
-            v.add(order.getgId());
-            v.add(order.getUserId());
+            v.add(vOrderinfId.getoId());
+            v.add(vOrderinfId.getCreateDate());
+            v.add(vOrderinfId.getCompDate());
+            v.add(vOrderinfId.getOsType());
+            v.add(vOrderinfId.getGoodsName());
+            v.add(vOrderinfId.getUserName());
             defaultTableModel.addRow(v);
         }
 
