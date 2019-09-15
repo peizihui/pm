@@ -1,9 +1,11 @@
 package com.pm.ui;
 
 import com.pm.dao.datasource.Manager;
+import com.pm.dao.datasource.User;
 import com.pm.process.ManagerProcess;
 import com.pm.process.UserProcess;
 import com.pm.ui.manager.ManagerMain;
+import com.pm.ui.user.UserMain;
 
 import javax.swing.*;
 import java.awt.*;
@@ -97,9 +99,13 @@ public class LoginMain extends JFrame {
                     //选择登录用户
                     if (userRadioButton.isSelected()) {
                         UserProcess up = new UserProcess();
-                        if (up.userLogin(account, password) != null) {
+                        User user = new User();
+                        user = up.userLogin(account, password);
+                        if (user != null) {
                             mainFrame.dispose();
                             //TODO 添加用户窗口
+                            UserMain UM = new UserMain(user);
+                            UM.go();
                             System.out.println("UY");
                         } else {
                             JOptionPane.showMessageDialog(null,
