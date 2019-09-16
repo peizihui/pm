@@ -26,6 +26,15 @@ public class OrderInfProcess {
     }
 
 
+    //修改上面的方法
+    public List<VOrderinfId> getAllOrderInf1(){
+        try {
+            return orderInfDAO.getAllOrderInf1();
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
+    }
     public VOrderinf getOrderInfByOId(int OId){
         return orderInfDAO.getOrderByOId(OId);
     }

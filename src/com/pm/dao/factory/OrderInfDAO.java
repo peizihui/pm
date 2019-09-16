@@ -16,6 +16,12 @@ public class OrderInfDAO {
         Query<VOrderinf> query = session.createQuery("from  VOrderinf ",VOrderinf.class);
         return query.getResultList();
     }
+    //修改上面的方法
+    public List<VOrderinfId> getAllOrderInf1(){
+        Query<VOrderinfId> query = session.createQuery("from  VOrderinfId ",VOrderinfId.class);
+        return query.getResultList();
+    }
+
     public VOrderinf getOrderByOId(int OId){
         Query query = session.createQuery("from VOrderinf where oId = ?1");
         query.setParameter(1,OId);

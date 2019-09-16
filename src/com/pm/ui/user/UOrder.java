@@ -76,12 +76,13 @@ public class UOrder extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 UOrder.this.dispose();
+                try{
                 String id = table.getValueAt(table.getSelectedRow(), 0).toString();
                 int ID = Integer.valueOf(id);
                 OrderProcess op = new OrderProcess();
                 op.cancelOrder(ID);
 
-                showData();
+                showData();}catch(Exception el){                    JOptionPane.showMessageDialog(null, "请正确操作", "警告", JOptionPane.ERROR_MESSAGE); }
 
 
             }
@@ -91,11 +92,16 @@ public class UOrder extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 UOrder.this.dispose();
-                String id = table.getValueAt(table.getSelectedRow(), 0).toString();
-                int ID = Integer.valueOf(id);
-                OrderProcess op = new OrderProcess();
-                op.deleteOrder(ID);
-                showData();
+                try {
+                    String id = table.getValueAt(table.getSelectedRow(), 0).toString();
+                    int ID = Integer.valueOf(id);
+                    OrderProcess op = new OrderProcess();
+                    op.deleteOrder(ID);
+                    showData();
+                }catch(Exception el){
+                    JOptionPane.showMessageDialog(null, "请正确操作", "警告", JOptionPane.ERROR_MESSAGE);
+
+                }
 
             }
         });
@@ -104,12 +110,16 @@ public class UOrder extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 UOrder.this.dispose();
-                String id = table.getValueAt(table.getSelectedRow(), 0).toString();
-                int ID = Integer.valueOf(id);
-                OrderInfProcess op = new OrderInfProcess();
-                ;
-                UOdetail UO = new UOdetail(op.getOrderInfByOId1(ID));
-                UO.go();
+                try{
+                    String id = table.getValueAt(table.getSelectedRow(), 0).toString();
+                    int ID = Integer.valueOf(id);
+                    OrderInfProcess op = new OrderInfProcess();
+                    ;
+                    UOdetail UO = new UOdetail(op.getOrderInfByOId1(ID));
+                    UO.go();
+                }catch(Exception el){
+                    JOptionPane.showMessageDialog(null, "请正确操作", "警告", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
         });

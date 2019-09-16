@@ -110,7 +110,7 @@ public class MOrder {
         defaultTableModel.setRowCount(0);
 
         OrderInfProcess orderInfProcess = new OrderInfProcess();
-        List<VOrderinfId> vOrderinfIdList = orderInfProcess.getAllOrderInf();
+        List<VOrderinfId> vOrderinfIdList = orderInfProcess.getAllOrderInf1();
 
         for (VOrderinfId vOrderinfId : vOrderinfIdList){
             Vector v = new Vector();
