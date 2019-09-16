@@ -1,6 +1,5 @@
 package com.pm.process;
 
-import com.pm.dao.datasource.VOrderinf;
 import com.pm.dao.datasource.VOrderinfId;
 import com.pm.dao.factory.OrderInfDAO;
 import com.pm.util.HibernateUtils;
@@ -16,7 +15,7 @@ public class OrderInfProcess {
         session = HibernateUtils.getSession();
         orderInfDAO= new OrderInfDAO(session);
     }
-    public List<VOrderinf> getAllOrderInf(){
+    public List<VOrderinfId> getAllOrderInf(){
         try {
             return orderInfDAO.getAllOrderInf();
         }catch (Exception e){
@@ -24,8 +23,26 @@ public class OrderInfProcess {
             return  null;
         }
     }
+    public VOrderinfId getOrderInfByOId(int OId){
+        return orderInfDAO.getOrderByOId(OId);
+    }
 
+    public List<VOrderinfId> getUserInf(){
+        try {
+            return orderInfDAO.getAllOrderInfGroupByUserName();
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
+    }
 
+    public VOrderinfId getOrderInfByOId1(int OId){
+        return orderInfDAO.getOrderByOId1(OId);
+    }
+    public List<VOrderinfId> getOrderInfByUId(int uId){
+        return  orderInfDAO.getOrderByUId(uId);
+
+    }
     //修改上面的方法
     public List<VOrderinfId> getAllOrderInf1(){
         try {
@@ -34,16 +51,5 @@ public class OrderInfProcess {
             e.printStackTrace();
             return  null;
         }
-    }
-    public VOrderinf getOrderInfByOId(int OId){
-        return orderInfDAO.getOrderByOId(OId);
-    }
-    public VOrderinfId getOrderInfByOId1(int OId){
-        return orderInfDAO.getOrderByOId1(OId);
-    }
-    public List<VOrderinfId> getOrderInfByUId(int uId){
-        return  orderInfDAO.getOrderByUId(uId);
-
-
     }
 }
