@@ -26,4 +26,13 @@ public class OrderInfProcess {
     public VOrderinfId getOrderInfByOId(int OId){
         return orderInfDAO.getOrderByOId(OId);
     }
+
+    public List<VOrderinfId> getUserInf(){
+        try {
+            return orderInfDAO.getAllOrderInfGroupByUserName();
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
+    }
 }
