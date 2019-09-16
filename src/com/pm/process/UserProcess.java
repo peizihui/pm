@@ -8,6 +8,7 @@ import com.pm.util.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.swing.*;
 import java.util.List;
 
 public class UserProcess {
@@ -102,24 +103,17 @@ public class UserProcess {
     public boolean insertUser(User user) {
         //开启事务
         Transaction transaction = session.beginTransaction();
-        try {
-            //业务逻辑
-            //1.根据id查询该账户是否存在
-         /*   User user2 = userDAO.queryUserByID(user.getUserName());
-            if(user2 != null){
-                JOptionPane.showMessageDialog(null, "用户已存在");
-            }*/
+        //1.根据username查询该账户是否存在
+        User user2 = userDAO.queryIDByUserName(user.getUserName());
+        if (user2 != null) {
+            JOptionPane.showMessageDialog(null, "用户已存在");
+        } else {
             userDAO.insertUser(user);
             //未出现异常提交
             transaction.commit();
             return true;
-        } catch (Exception e) {
-            //出现异常回滚
-            transaction.rollback();
-            //打印异常信息
-            System.out.println(e.getMessage());
-            return false;
         }
+        return false;
     }
 
 }

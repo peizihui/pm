@@ -1,7 +1,8 @@
 package com.pm.ui.manager;
 
-import com.pm.dao.datasource.User;
+import com.pm.dao.datasource.VOrderinfId;
 import com.pm.dao.factory.UserDAO;
+import com.pm.process.OrderInfProcess;
 import com.pm.process.UserProcess;
 import org.hibernate.Session;
 
@@ -37,10 +38,10 @@ public class MUser extends JFrame {
         adduser = new JButton("添加用户");
         freezeuser = new JButton("冻结用户");
         stopfrzee = new JButton("解冻用户");
-        updatepwd = new JButton("修改密码");
+        updatepwd = new JButton("重置密码");
 
         //设置表格
-        String[] columnNames = {"ID", "用户名", "密码", "账户状态"};
+        String[] columnNames = {"ID","用户名","账户状态","积分值","积分类型id"};
 
         table = new JTable(data, columnNames);
         table.setModel(new DefaultTableModel(data, columnNames));
@@ -79,7 +80,6 @@ public class MUser extends JFrame {
         adduser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MUser.this.dispose();
                 AddUser addUser = new AddUser();
                 addUser.Main();
             }
@@ -88,7 +88,12 @@ public class MUser extends JFrame {
         freezeuser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = table.getValueAt(table.getSelectedRow(), 0).toString();
+                String id = null;
+                try {
+                    id = table.getValueAt(table.getSelectedRow(), 0).toString();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "请选中一个用户", "提示", JOptionPane.WARNING_MESSAGE);
+                }
                 int ID = Integer.valueOf(id);
 
                 UserProcess userProcess = new UserProcess();
@@ -98,7 +103,13 @@ public class MUser extends JFrame {
         stopfrzee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = table.getValueAt(table.getSelectedRow(), 0).toString();
+
+                String id = null;
+                try {
+                    id = table.getValueAt(table.getSelectedRow(), 0).toString();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "请选中一个用户", "提示", JOptionPane.WARNING_MESSAGE);
+                }
                 int ID = Integer.valueOf(id);
 
                 UserProcess userProcess = new UserProcess();
@@ -108,24 +119,45 @@ public class MUser extends JFrame {
         updatepwd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = table.getValueAt(table.getSelectedRow(), 0).toString();
+
+                String id = null;
+                try {
+                    id = table.getValueAt(table.getSelectedRow(), 0).toString();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "请选中一个用户", "提示", JOptionPane.WARNING_MESSAGE);
+                }
                 int ID = Integer.valueOf(id);
-                String pwd = "12";
-                EditPwd editPwd = new EditPwd();
-                editPwd.Main(ID,pwd);
+
+                int n = JOptionPane.showConfirmDialog(null, "确认重置吗?", "提示", JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION) {
+                    String pwd = "123456";
+                    UserProcess up = new UserProcess();
+                    Boolean modify = up.editpwdUser(ID,pwd);
+                    JOptionPane.showMessageDialog(new JFrame(),"已重置");
+                } else if (n == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(new JFrame(),"已取消");
+                }
 
             }
         });
         addpoint.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = table.getValueAt(table.getSelectedRow(), 0).toString();
+
+                String id = null;
+                try {
+                    id = table.getValueAt(table.getSelectedRow(), 0).toString();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "请选中一个用户", "提示", JOptionPane.WARNING_MESSAGE);
+                }
                 int ID = Integer.valueOf(id);
 
                 int addValue=0;
-
+                //MUser mUser = new MUser();
+                //mUser.repaint();
                 PointsRecharge pointsRecharge = new PointsRecharge();
                 pointsRecharge.Main(addValue,ID);
+
             }
         });
     }
@@ -137,16 +169,25 @@ public class MUser extends JFrame {
         DefaultTableModel defaultTableModel = (DefaultTableModel) table.getModel();
         defaultTableModel.setRowCount(0);
 
-        UserProcess userProcess = new UserProcess();
-        List<User> usersList = userProcess.getAllUsers();
+        OrderInfProcess orderInfProcess = new OrderInfProcess();
+        List<VOrderinfId> userInfList = orderInfProcess.getUserInf();
 
-        for (User user : usersList) {
+        for (VOrderinfId userInf : userInfList){
             Vector v = new Vector();
-            v.add(user.getId());
-            v.add(user.getUserName());
-            v.add(user.getUserPwd());
-            v.add(user.getIsFreeze());
+            v.add(userInf.getUserId());
+            v.add(userInf.getUserName());
+            v.add(userInf.getIsFreeze());
+            v.add(userInf.getPointValue());
+            v.add(userInf.getPointType());
             defaultTableModel.addRow(v);
+
+        }
         }
     }
-}
+    /*public static void main(String[] args) {
+        new MUser().MUser();
+    }*/
+
+
+
+
