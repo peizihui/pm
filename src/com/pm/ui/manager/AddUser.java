@@ -1,7 +1,14 @@
 package com.pm.ui.manager;
 
+import com.pm.dao.datasource.Point;
 import com.pm.dao.datasource.User;
+import com.pm.dao.factory.PointDao;
+import com.pm.dao.factory.UserDAO;
+import com.pm.process.PointProcess;
 import com.pm.process.UserProcess;
+import com.pm.util.HibernateUtils;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -30,6 +37,16 @@ public class AddUser extends JFrame {
 
     //获取输入框内的值
     String strname;
+    private Session session;
+    private  PointDao pointDao;
+    private  UserDAO userDAO;
+
+
+    public AddUser() {
+        session = HibernateUtils.getSession();
+        userDAO = new UserDAO(session);
+        pointDao = new PointDao(session);
+    }
 
     //界面方法
     public void Main() {
@@ -81,13 +98,27 @@ public class AddUser extends JFrame {
                 } else {
                     //将输入框的值转入bean
                     User user = new User();
+                    Point point = new Point();
                     //创建service对象,
                     UserProcess userProcess = new UserProcess();
+                    PointProcess pointProcess = new PointProcess();
                     user.setUserName(strname);
                     user.setUserPwd("123456");
+                    String userName = strname;
 
                     //执行添加用户方法,并将返回值存储在news里
                     boolean news = userProcess.insertUser(user);
+                    Transaction transaction = session.beginTransaction();
+
+                    int newid = 0;
+                        newid = userDAO.queryIDByUserName(strname).getId();
+
+                    point.setPointValue(0);
+                    point.setUserId(newid);
+                    point.setPtId(1);
+                    pointDao.insertUsertopoint(point);
+                    //未出现异常提交
+                    transaction.commit();
 
                     //判断执行是否成功
                     if (news) {

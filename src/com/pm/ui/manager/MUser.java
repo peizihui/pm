@@ -153,8 +153,6 @@ public class MUser extends JFrame {
                 int ID = Integer.valueOf(id);
 
                 int addValue=0;
-                //MUser mUser = new MUser();
-                //mUser.repaint();
                 PointsRecharge pointsRecharge = new PointsRecharge();
                 pointsRecharge.Main(addValue,ID);
 
@@ -184,9 +182,6 @@ public class MUser extends JFrame {
         }
         }
     }
-    /*public static void main(String[] args) {
-        new MUser().MUser();
-    }*/
 
 
 

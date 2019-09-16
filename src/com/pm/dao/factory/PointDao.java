@@ -32,4 +32,8 @@ public class PointDao {
         Query<Point> query = session.createQuery("from Point", Point.class);
         return query.getResultList();
     }
+
+    public void insertUsertopoint(Point b) {
+        session.save(b);
+    }
 }

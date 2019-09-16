@@ -28,6 +28,12 @@ public class UserDAO {
         return (User) query.uniqueResult();
     }
 
+    public Point queryIDByUserNameTOPOINT(String userName) {
+        Query query = session.createQuery("from Point where userId = ?1");
+        query.setParameter(1, userName);
+        return (Point) query.uniqueResult();
+    }
+
     /***
      * 使用用户名字和密码登录系统
      * @param name
