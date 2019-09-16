@@ -80,7 +80,14 @@ public class UOrder extends JFrame{
                 String id = table.getValueAt(table.getSelectedRow(), 0).toString();
                 int ID = Integer.valueOf(id);
                 OrderProcess op = new OrderProcess();
-                op.cancelOrder(ID);
+                if(op.cancelOrder(ID)==true){
+
+                    JOptionPane.showMessageDialog(null, "操作成功");
+                }else{
+
+
+                    JOptionPane.showMessageDialog(null, "操作失败");
+                };
 
                 showData();}catch(Exception el){                    JOptionPane.showMessageDialog(null, "请正确操作", "警告", JOptionPane.ERROR_MESSAGE); }
 
@@ -96,8 +103,12 @@ public class UOrder extends JFrame{
                     String id = table.getValueAt(table.getSelectedRow(), 0).toString();
                     int ID = Integer.valueOf(id);
                     OrderProcess op = new OrderProcess();
-                    op.deleteOrder(ID);
-                    showData();
+                    if (op.deleteOrder(ID)==true){
+                        showData();                        JOptionPane.showMessageDialog(null, "操作成功");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "操作失败");
+                    };
+
                 }catch(Exception el){
                     JOptionPane.showMessageDialog(null, "请正确操作", "警告", JOptionPane.ERROR_MESSAGE);
 
