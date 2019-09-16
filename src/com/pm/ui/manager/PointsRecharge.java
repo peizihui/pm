@@ -19,11 +19,12 @@ public class PointsRecharge extends JFrame {
     JFrame frame = new JFrame();
 
     //获取输入框内的值
-    int addValue;
+    private int addValue1;
 
     //界面方法
     public void Main(int addValue, int id) {
         //初始化面板
+        this.addValue1 = addValue;
         jp1 = new JPanel();
         jp2 = new JPanel();
 
@@ -64,19 +65,19 @@ public class PointsRecharge extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //获取输入框内容
                 findjtext();
-                if (addValue == 0) {
+                if (addValue1 < 0) {
                     JOptionPane.showMessageDialog(null, "不能为空！", "提示", JOptionPane.WARNING_MESSAGE);
                 } else {
                     //创建service对象,
                     PointProcess pointProcess = new PointProcess();
-                    Boolean modify = pointProcess.maddpoints(addValue, id);
+                    Boolean modify = pointProcess.maddpoints(addValue1, id);
                     //执行添加用户方法,并将返回值存储在news里
                     //判断执行是否成功
                     if (modify) {
                         JOptionPane.showMessageDialog(frame, "充值成功", "提示", JOptionPane.WARNING_MESSAGE);
                         frame.dispose();
-                        ManagerMain jframeMain = new ManagerMain();
-                        jframeMain.go();
+                        //MUser mUser = new MUser();
+                        //mUser.showData();
                     } else {
                         //将信息展示
                         JOptionPane.showMessageDialog(null, "failed");
@@ -84,11 +85,12 @@ public class PointsRecharge extends JFrame {
                 }
             }
         });
+
     }
 
     //获取输入框输入
     public void findjtext() {
-        addValue = Integer.parseInt(apoints.getText());
+        addValue1 = Integer.parseInt(apoints.getText());
     }
 
 }

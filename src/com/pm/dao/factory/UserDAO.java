@@ -1,5 +1,6 @@
 package com.pm.dao.factory;
 
+import com.pm.dao.datasource.Point;
 import com.pm.dao.datasource.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -21,8 +22,10 @@ public class UserDAO {
      * @param id
      * @return
      */
-    public User queryUserByID(String id) {
-        return session.get(User.class, id);
+    public User queryIDByUserName(String userName) {
+        Query query = session.createQuery("from User where userName = ?1");
+        query.setParameter(1, userName);
+        return (User) query.uniqueResult();
     }
 
     /***

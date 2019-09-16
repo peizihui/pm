@@ -1,6 +1,6 @@
 package com.pm.dao.factory;
 
-import com.pm.dao.datasource.VOrderinf;
+import com.pm.dao.datasource.VOrderinfId;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -11,13 +11,18 @@ public class OrderInfDAO {
 
     public OrderInfDAO(Session session){this.session = session;}
 
-    public List<VOrderinf> getAllOrderInf(){
-        Query<VOrderinf> query = session.createQuery("from  VOrderinf ",VOrderinf.class);
+    public List<VOrderinfId> getAllOrderInf(){
+        Query<VOrderinfId> query = session.createQuery("from  VOrderinfId",VOrderinfId.class);
         return query.getResultList();
     }
-    public VOrderinf getOrderByOId(int OId){
-        Query query = session.createQuery("from VOrderinf where oId = ?1");
+    public VOrderinfId getOrderByOId(int OId){
+        Query query = session.createQuery("from VOrderinfId where oId = ?1");
         query.setParameter(1,OId);
-        return (VOrderinf)query.uniqueResult();
+        return (VOrderinfId)query.uniqueResult();
+    }
+
+    public List<VOrderinfId> getAllOrderInfGroupByUserName(){
+        Query<VOrderinfId> query = session.createQuery("from  VOrderinfId group by userName",VOrderinfId.class);
+        return query.getResultList();
     }
 }

@@ -21,6 +21,13 @@ public class OrderDAO {
         query.setParameter(1,id);
         return (Order)query.uniqueResult();
     }
+    //根据UserId获取订单
+    public List<Order> getOrderByUserId(int userId){
+        Query query = session.createQuery("from Order where userId = ?1");
+        query.setParameter(1,userId);
+        List<Order> list = query.list();
+        return list;
+    }
     public void frozenOrderById(Order id){
         Query query = session.createQuery("update Order set osId = 5 where id = ?1");
         query.setParameter(1,id);
