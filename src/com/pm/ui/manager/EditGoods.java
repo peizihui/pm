@@ -158,4 +158,9 @@ public class EditGoods {
         }
         return false;
     }
+
+    //获取主窗口属性
+    public Object getFrame(){
+        return this.mainFrame;
+    }
 }

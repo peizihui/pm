@@ -85,6 +85,45 @@ public class MGoods {
             public void actionPerformed(ActionEvent e) {
                 AddGoods addGoods = new AddGoods();
                 addGoods.go();
+
+                //获取子窗口，添加窗口监听当子窗口关闭后刷新table数据
+                JFrame frame = (JFrame) addGoods.getFrame();
+                frame.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        showData();
+                    }
+
+                    @Override
+                    public void windowIconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowActivated(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {
+
+                    }
+                });
             }
         });
 
@@ -101,6 +140,44 @@ public class MGoods {
                     int ID = Integer.parseInt(id);
                     EditGoods editGoods = new EditGoods();
                     editGoods.go(ID);
+                    //获取子窗口，添加窗口监听当子窗口关闭后刷新table数据
+                    JFrame frame = (JFrame) editGoods.getFrame();
+                    frame.addWindowListener(new WindowListener() {
+                        @Override
+                        public void windowOpened(WindowEvent e) {
+
+                        }
+
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+
+                        }
+
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            showData();
+                        }
+
+                        @Override
+                        public void windowIconified(WindowEvent e) {
+
+                        }
+
+                        @Override
+                        public void windowDeiconified(WindowEvent e) {
+
+                        }
+
+                        @Override
+                        public void windowActivated(WindowEvent e) {
+
+                        }
+
+                        @Override
+                        public void windowDeactivated(WindowEvent e) {
+
+                        }
+                    });
                 }
             }
         });
