@@ -23,11 +23,20 @@ public class OrderDAO {
     }
     //根据UserId获取订单
     public List<Order> getOrderByUserId(int userId){
-        Query query = session.createQuery("from Order where userId = ?1");
+        Query query = session.createQuery("from Order where userId = ?1 and osId != 5");
         query.setParameter(1,userId);
         List<Order> list = query.list();
         return list;
     }
+    //更新订单状态
+    public int updateOrderStatus(int orderId, int status){
+        String sql = "update Order set osId = ?1 where id = ?2";
+        Query query = session.createQuery(sql);
+        query.setParameter(1,status);
+        query.setParameter(2,orderId);
+        return query.executeUpdate();
+
+    };
     public void frozenOrderById(Order id){
         Query query = session.createQuery("update Order set osId = 5 where id = ?1");
         query.setParameter(1,id);

@@ -142,4 +142,9 @@ public class AddGoods{
         }
         return false;
     }
+
+    //获取主窗口属性
+    public Object getFrame(){
+        return this.mainFrame;
+    }
 }

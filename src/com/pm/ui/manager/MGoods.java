@@ -34,13 +34,21 @@ public class MGoods {
         //设置表格
         String[] columnNames = {"ID", "商品编号", "商品名", "兑换价格"};
 
-        table = new JTable(null, columnNames);
+        table = new JTable(null, columnNames){
+            //设置禁止编辑单元格
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         table.setModel(new DefaultTableModel(null, columnNames));
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setSize(300, 300);
         table.setFillsViewportHeight(true);
         table.setAutoCreateRowSorter(true);
+        //设置表格列不可移动
+        table.getTableHeader().setReorderingAllowed(false);
 
 
 
@@ -66,7 +74,7 @@ public class MGoods {
 
     public void go() {
         showData();
-        refreshButton.addActionListener(new AbstractAction() {
+        refreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 showData();
@@ -77,6 +85,45 @@ public class MGoods {
             public void actionPerformed(ActionEvent e) {
                 AddGoods addGoods = new AddGoods();
                 addGoods.go();
+
+                //获取子窗口，添加窗口监听当子窗口关闭后刷新table数据
+                JFrame frame = (JFrame) addGoods.getFrame();
+                frame.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        showData();
+                    }
+
+                    @Override
+                    public void windowIconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowActivated(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {
+
+                    }
+                });
             }
         });
 
@@ -84,11 +131,54 @@ public class MGoods {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String id = table.getValueAt(table.getSelectedRow(),0).toString();
+                if (id.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "请选择商品！",
+                            "注意",
+                            JOptionPane.WARNING_MESSAGE);
+                } else {
+                    int ID = Integer.parseInt(id);
+                    EditGoods editGoods = new EditGoods();
+                    editGoods.go(ID);
+                    //获取子窗口，添加窗口监听当子窗口关闭后刷新table数据
+                    JFrame frame = (JFrame) editGoods.getFrame();
+                    frame.addWindowListener(new WindowListener() {
+                        @Override
+                        public void windowOpened(WindowEvent e) {
 
-                int ID = Integer.parseInt(id);
+                        }
 
-                EditGoods editGoods = new EditGoods();
-                editGoods.go(ID);
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+
+                        }
+
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            showData();
+                        }
+
+                        @Override
+                        public void windowIconified(WindowEvent e) {
+
+                        }
+
+                        @Override
+                        public void windowDeiconified(WindowEvent e) {
+
+                        }
+
+                        @Override
+                        public void windowActivated(WindowEvent e) {
+
+                        }
+
+                        @Override
+                        public void windowDeactivated(WindowEvent e) {
+
+                        }
+                    });
+                }
             }
         });
 
