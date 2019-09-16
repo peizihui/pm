@@ -1,9 +1,13 @@
 package com.pm.process;
 
+import com.pm.dao.datasource.Point;
+import com.pm.dao.datasource.User;
 import com.pm.dao.factory.PointDao;
 import com.pm.util.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import java.util.List;
 
 public class PointProcess {
     private Session session;
@@ -26,6 +30,15 @@ public class PointProcess {
             transaction.rollback();
             System.out.println(e.getMessage());
             return false;
+        }
+    }
+
+    public List<Point> getAllPoint() {
+        try {
+            return pointDao.getAllPoint();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

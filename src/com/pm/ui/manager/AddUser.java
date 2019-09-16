@@ -93,16 +93,10 @@ public class AddUser extends JFrame {
                     if (news) {
                         JOptionPane.showMessageDialog(frame, "添加成功", "提示", JOptionPane.WARNING_MESSAGE);
                         frame.dispose();
-                        ManagerMain jframeMain = new ManagerMain();
-                        jframeMain.go();
-                    } else {
-                        //将信息展示
-                        JOptionPane.showMessageDialog(null, "failed");
                     }
                 }
             }
         });
-
     }
 
     //获取输入框输入
@@ -110,7 +104,4 @@ public class AddUser extends JFrame {
         strname = name.getText().toString();
     }
 
-   /* public static void main(String[] args) {
-       new AddUser().Main();
-    }*/
 }
