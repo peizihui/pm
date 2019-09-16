@@ -35,4 +35,21 @@ public class OrderInfProcess {
             return  null;
         }
     }
+
+    public VOrderinfId getOrderInfByOId1(int OId){
+        return orderInfDAO.getOrderByOId1(OId);
+    }
+    public List<VOrderinfId> getOrderInfByUId(int uId){
+        return  orderInfDAO.getOrderByUId(uId);
+
+    }
+
+    public List<VOrderinfId> getAllOrderInf1(){
+        try {
+            return orderInfDAO.getAllOrderInf1();
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
+    }
 }
