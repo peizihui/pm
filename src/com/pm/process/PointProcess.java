@@ -25,7 +25,8 @@ public class PointProcess {
     public boolean maddpoints(int addValue, int id) {
         Transaction transaction = session.beginTransaction();
         try {
-            int orgValue = pointDao.getPointByID(id).getPointValue();
+            int orgValue = 0;
+            orgValue = pointDao.getPointByID(id).getPointValue();
             int updatetotal = addValue + orgValue;
             pointDao.maddpoints(updatetotal,id);
             transaction.commit();
@@ -36,36 +37,4 @@ public class PointProcess {
             return false;
         }
     }
-
-    public void insertUsertopoint(Point point) {
-
-        Transaction transaction = session.beginTransaction();
-
-        int newid = 0;
-        try {
-            User user = userDAO.queryIDByUserName("16543");
-            newid = user.getId();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        point.setUserId(newid);
-        pointDao.insertUsertopoint(point);
-        //未出现异常提交
-        transaction.commit();
-
-        }
-
-
-    public List<Point> getAllPoint() {
-        try {
-            return pointDao.getAllPoint();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-
-
-
 }

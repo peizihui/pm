@@ -8,6 +8,7 @@ import java.util.List;
 
 public class OrderInfDAO {
     private Session session;
+    private Session query;
 
     public OrderInfDAO(Session session){this.session = session;}
 

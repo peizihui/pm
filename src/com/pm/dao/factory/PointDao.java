@@ -15,14 +15,15 @@ public class PointDao {
     }
 
     public Point getPointByID(int id) {
-        Query query = session.createQuery("from Point where id = ?1");
+        Query query = session.createQuery("from Point where userId = ?1");
         query.setParameter(1, id);
         return (Point) query.uniqueResult();
+
     }
 
     //增加积分
     public void maddpoints(int updatetotal, int id) {
-        Query query = session.createQuery("update Point set pointValue =?1 where id=?2");
+        Query query = session.createQuery("update Point set pointValue =?1 where userId=?2");
         query.setParameter(1, updatetotal);
         query.setParameter(2, id);
         query.executeUpdate();

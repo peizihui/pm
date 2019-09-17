@@ -9,8 +9,10 @@ import org.hibernate.Session;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -95,9 +97,15 @@ public class MUser extends JFrame {
                     JOptionPane.showMessageDialog(null, "请选中一个用户", "提示", JOptionPane.WARNING_MESSAGE);
                 }
                 int ID = Integer.valueOf(id);
+                int n = JOptionPane.showConfirmDialog(null, "确认冻结吗?", "提示", JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION){
+                    UserProcess userProcess = new UserProcess();
+                    userProcess.frzzeeUserByID(ID);
+                    JOptionPane.showMessageDialog(new JFrame(),"已冻结");
+                }else if(n == JOptionPane.NO_OPTION){
+                    JOptionPane.showMessageDialog(new JFrame(),"已取消");
+                }
 
-                UserProcess userProcess = new UserProcess();
-                userProcess.frzzeeUserByID(ID);
             }
         });
         stopfrzee.addActionListener(new ActionListener() {
@@ -111,9 +119,15 @@ public class MUser extends JFrame {
                     JOptionPane.showMessageDialog(null, "请选中一个用户", "提示", JOptionPane.WARNING_MESSAGE);
                 }
                 int ID = Integer.valueOf(id);
+                int n = JOptionPane.showConfirmDialog(null, "确认解结吗?", "提示", JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION){
+                    UserProcess userProcess = new UserProcess();
+                    userProcess.stopfrzzeeUserByID(ID);
+                    JOptionPane.showMessageDialog(new JFrame(),"已解结");
+                }else if(n == JOptionPane.NO_OPTION){
+                    JOptionPane.showMessageDialog(new JFrame(),"已取消");
+                }
 
-                UserProcess userProcess = new UserProcess();
-                userProcess.stopfrzzeeUserByID(ID);
             }
         });
         updatepwd.addActionListener(new ActionListener() {
@@ -147,15 +161,13 @@ public class MUser extends JFrame {
                 String id = null;
                 try {
                     id = table.getValueAt(table.getSelectedRow(), 0).toString();
+                    int ID = Integer.valueOf(id);
+                    int addValue=0;
+                    PointsRecharge pointsRecharge = new PointsRecharge();
+                    pointsRecharge.Main(addValue,ID);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "请选中一个用户", "提示", JOptionPane.WARNING_MESSAGE);
                 }
-                int ID = Integer.valueOf(id);
-
-                int addValue=0;
-                PointsRecharge pointsRecharge = new PointsRecharge();
-                pointsRecharge.Main(addValue,ID);
-
             }
         });
     }
@@ -169,7 +181,7 @@ public class MUser extends JFrame {
 
         OrderInfProcess orderInfProcess = new OrderInfProcess();
         List<VOrderinfId> userInfList = orderInfProcess.getUserInf();
-
+        //todo:在VOrderinfId视图中获取以下6个字段，显示在表格中
         for (VOrderinfId userInf : userInfList){
             Vector v = new Vector();
             v.add(userInf.getUserId());

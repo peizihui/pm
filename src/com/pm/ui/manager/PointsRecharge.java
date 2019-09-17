@@ -76,8 +76,6 @@ public class PointsRecharge extends JFrame {
                     if (modify) {
                         JOptionPane.showMessageDialog(frame, "充值成功", "提示", JOptionPane.WARNING_MESSAGE);
                         frame.dispose();
-                        //MUser mUser = new MUser();
-                        //mUser.showData();
                     } else {
                         //将信息展示
                         JOptionPane.showMessageDialog(null, "failed");

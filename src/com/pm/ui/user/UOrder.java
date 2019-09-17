@@ -126,7 +126,7 @@ public class UOrder extends JFrame{
                     int ID = Integer.valueOf(id);
                     OrderInfProcess op = new OrderInfProcess();
                     ;
-                    UOdetail UO = new UOdetail(op.getOrderInfByOId1(ID));
+                    UOdetail UO = new UOdetail(op.getOrderInfByOId(ID));
                     UO.go();
                 }catch(Exception el){
                     JOptionPane.showMessageDialog(null, "请正确操作", "警告", JOptionPane.ERROR_MESSAGE);
@@ -144,7 +144,7 @@ public class UOrder extends JFrame{
         defaultTableModel.setRowCount(0);
 
         OrderInfProcess op = new OrderInfProcess();
-        List<VOrderinfId> OrderList = op.getOrderInfByUId(user.getId());
+        /*List<VOrderinfId> OrderList = op.getOrderInfByUId(user.getId());
         for (VOrderinfId order : OrderList) {
             Vector v = new Vector();
             v.add(order.getoId());
@@ -152,6 +152,6 @@ public class UOrder extends JFrame{
             v.add(order.getGoodsName());
             v.add(order.getOsType());
             defaultTableModel.addRow(v);
-        }
+        }*/
     }
 }
