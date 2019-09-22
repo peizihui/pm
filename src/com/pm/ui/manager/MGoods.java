@@ -196,7 +196,7 @@ public class MGoods {
                     String id = table.getValueAt(table.getSelectedRow(),0).toString();
 
                     int ID = Integer.parseInt(id);
-                    boolean c = goodsProcess.deleGoodsByID(ID);
+                    boolean c = goodsProcess.deleGoods(ID);
                     if (c) {
                         //刷新表格
                         showData();
@@ -223,7 +223,7 @@ public class MGoods {
         defaultTableModel.setRowCount(0);
 
         GoodsProcess goodsProcess = new GoodsProcess();
-        List<Goods> goodsList = goodsProcess.getAllGoods();
+        List<Goods> goodsList = goodsProcess.getGoods();
 
         for(Goods goods : goodsList){
             Vector v = new Vector();

@@ -13,18 +13,20 @@ import java.util.List;
 public class GoodsProcess {
 
     private Session session;
-    private ManagerDAO ManagerDAO;
     private GoodsDAO goodsDAO;
 
     public GoodsProcess() {
         //获取session
         session = HibernateUtils.getSession();
         //初始化
-        ManagerDAO = new ManagerDAO(session);
         goodsDAO = new GoodsDAO(session);
     }
 
-    public List<Goods> getAllGoods(){
+    /***
+     * 获取所有的商品信息，返回商品列表
+     * @return
+     */
+    public List<Goods> getGoods(){
         try {
             return goodsDAO.getAllGoods();
         }catch (Exception e){
@@ -33,7 +35,21 @@ public class GoodsProcess {
         }
     }
 
-    public boolean deleGoodsByID(int id) {
+    /**
+     * 通过商品ID查询，返回商品信息
+     * @param id
+     * @return
+     */
+    public Goods getGoods(int id) {
+        return goodsDAO.getGoodsByID(id);
+    }
+
+    /***
+     * 通过商品ID删除商品
+     * @param id
+     * @return
+     */
+    public boolean deleGoods(int id) {
         Transaction transaction = session.beginTransaction();
         try {
             goodsDAO.deleGoodsByID(id);
@@ -60,9 +76,7 @@ public class GoodsProcess {
     }
 
 
-    public Goods getGoodsById(int id) {
-        return goodsDAO.getGoodsByID(id);
-    }
+
 
     public boolean updateGoods(Goods goods) {
         Transaction transaction = session.beginTransaction();

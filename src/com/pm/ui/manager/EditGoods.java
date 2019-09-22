@@ -89,7 +89,7 @@ public class EditGoods {
     public void go(int id){
         this.ID = id;
         GoodsProcess goodsProcess = new GoodsProcess();
-        Goods goods = goodsProcess.getGoodsById(ID);
+        Goods goods = goodsProcess.getGoods(ID);
         idText.setText(String.valueOf(goods.getId()));
         goodsIdText.setText(goods.getGoodsId());
         goodsNameText.setText(goods.getGoodsName());
@@ -122,7 +122,7 @@ public class EditGoods {
             }
         });
 
-        cancelButton.addActionListener(new AbstractAction() {
+        cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainFrame.dispose();
